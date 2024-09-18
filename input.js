@@ -1,0 +1,2 @@
+export const input1 = '<mirroir data-width="10pouces" data-height="10pouces" data-color="black" data-material="wood" />';
+export const input2 = '<table data-width="48pouces" data-length="48pouces" data-color="blue" data-materials="wood|stone" data-feet-count="4" />';
