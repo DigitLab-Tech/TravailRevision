@@ -1,15 +1,19 @@
+import { output1, output2 } from "./output.js";
+
 export function inputToOutput(input){
-    const splitInput = input
+    input = input
     .replace('<', '')
     .replace(' />', '')
     .replaceAll('data-', '')
-    .replaceAll('"', '')
-    .split(' ');
+    .replaceAll('"', '');
 
-    const object = {type: splitInput[0]};
+    input = input.split(' ');
 
-    for(let i = 1; i < splitInput.length; i++){
-        let [key, value] = splitInput[i].split('=');
+    const object = {type: input[0]};
+
+    for(let i = 1; i < input.length; i++){
+        let [key, value] = input[i].split('=');
+        let transformedKey = key;
 
         if(!isNaN(value)){
             value = parseInt(value);
@@ -18,14 +22,19 @@ export function inputToOutput(input){
         }
 
         if(key.includes('-')){
-            const charIndex = key.indexOf('-');
+            key = key.split('-');
 
-            key = key.replace('-', '');
-            key = key.slice(0, charIndex) + key[charIndex].toUpperCase() + key.slice(charIndex + 1, key.length);
+            transformedKey = key[0];
+
+            for(let j = 1; j < key.length; j++){
+                transformedKey += key[j][0].toUpperCase() + key[j].slice(1);
+            }
         }
 
-        object[key] = value;
+        object[transformedKey] = value;
     }
 
+    console.log(object);
+    console.log(output2);
     return object;
 }
